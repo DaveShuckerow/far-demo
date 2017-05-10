@@ -12,7 +12,7 @@ class Room extends RoomRef {
   Room(Int64 id, String name, this.members) : super(id, name);
 }
 
-/// A referencec to a [Room] by id with its name for convenience.
+/// A reference to a [Room] by id with its name for convenience.
 class RoomRef {
   final Int64 id;
   final String name;
