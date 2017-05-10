@@ -12,6 +12,15 @@ abstract class Store<P, D> {
   Map<P, Response<D>> _cache = <P, Response<D>>{};
 }
 
+/// A wrapper of all subscription-related behavior to a store.
+// TODO: create Flutter and Angular-specific subscribers that adapt the
+// subscription to the framework's lifecycle.
+abstract class StoreSubscriber {
+  void onStoreUpdate();
+
+  List<Store> get subscriptions;
+}
+
 class Response<D> {
   final D data;
   final Error error;
