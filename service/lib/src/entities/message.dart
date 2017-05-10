@@ -9,9 +9,9 @@ import 'user.dart';
 class Message extends MessageRef {
   final String contents;
   final UserRef sender;
-  final RoomRef roomRef;
+  final RoomRef room;
 
-  Message(Int64 id, String summary, this.contents, this.sender, this.roomRef)
+  Message(Int64 id, String summary, this.contents, this.sender, this.room)
       : super(id, summary);
 }
 

@@ -1,5 +1,6 @@
 import 'package:fixnum/fixnum.dart';
 
+import 'message.dart';
 import 'user.dart';
 
 /// A room in our chat app.
@@ -8,8 +9,9 @@ import 'user.dart';
 /// [Message]s that have been sent in the room.
 class Room extends RoomRef {
   final Set<UserRef> members;
+  final List<MessageRef> messages;
 
-  Room(Int64 id, String name, this.members) : super(id, name);
+  Room(Int64 id, String name, this.members, this.messages) : super(id, name);
 }
 
 /// A reference to a [Room] by id with its name for convenience.
