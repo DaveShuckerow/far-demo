@@ -5,7 +5,7 @@ import 'user.dart';
 
 /// A message in our chat app.
 ///
-/// A message is sent by a user to a chat room.
+/// A message is sent by a [User] to a chat [Room].
 class Message extends MessageRef {
   final String contents;
   final UserRef sender;
