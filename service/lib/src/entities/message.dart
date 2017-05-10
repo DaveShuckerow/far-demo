@@ -11,7 +11,8 @@ class Message extends MessageRef {
   final UserRef sender;
   final RoomRef roomRef;
 
-  Message(Int64 id, String summary, this.contents) : super(id, summary);
+  Message(Int64 id, String summary, this.contents, this.sender, this.roomRef)
+      : super(id, summary);
 }
 
 /// A reference to a [Message] with its id and a summary of the contents.
