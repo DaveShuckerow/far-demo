@@ -2,11 +2,31 @@ html {height: 100%;}
 
 body {
     height: 100%;
-    background-color: #F8F8F8;
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     font-weight: normal;
     line-height: 1.2em;
     margin: 0;
     padding: 0;
+}
+
+.tall-shadow {
+  box-shadow: 0 8px 7px 0 rgba(0,0,0,0.26);
+}
+
+.short-shadow {
+  box-shadow: 0 4px 3px 0 rgba(0,0,0,0.26);
+}
+
+.primary-material {
+  background-color: #7E57C2;
+  color: #EDEDED;
+}
+
+.fg-material {
+  background-color: #F8F8F8;
+}
+
+.bg-material {
+  background-color: #E7E7E7;
 }
