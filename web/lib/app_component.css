@@ -5,10 +5,11 @@
 }
 
 .header {
-  background-color: #26C6DA;
-   height: 48px;
-   padding: 8px;
-   box-shadow: 0 8px 7px 0 rgba(0,0,0,0.26);
+  background-color: #7E57C2;
+  color: #EDEDED;
+  height: 48px;
+  padding: 8px;
+  box-shadow: 0 8px 7px 0 rgba(0,0,0,0.26);
 }
 
 .page {
