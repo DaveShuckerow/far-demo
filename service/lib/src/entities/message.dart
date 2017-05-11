@@ -6,19 +6,11 @@ import 'user.dart';
 /// A message in our chat app.
 ///
 /// A message is sent by a [User] to a chat [Room].
-class Message extends MessageRef {
+class Message {
+  final Int64 id;
   final String contents;
   final UserRef sender;
   final RoomRef room;
 
-  Message(Int64 id, String summary, this.contents, this.sender, this.room)
-      : super(id, summary);
-}
-
-/// A reference to a [Message] with its id and a summary of the contents.
-class MessageRef {
-  final Int64 id;
-  final String summary;
-
-  MessageRef(this.id, this.summary);
+  Message(this.id, this.contents, this.sender, this.room);
 }

@@ -5,7 +5,7 @@ import 'room.dart';
 ///
 /// Each user belongs to one or more rooms.
 class User extends UserRef {
-  final Set<RoomRef> rooms;
+  final List<RoomRef> rooms;
   User(Int64 id, String name, this.rooms) : super(id, name);
 }
 
