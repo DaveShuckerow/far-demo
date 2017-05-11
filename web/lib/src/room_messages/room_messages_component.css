@@ -2,16 +2,10 @@
   padding: 8px 12px;
   display: inline-block;
   margin-bottom: 20px;
+  float: left;
+  clear: both;
 }
 
 .from-me {
   float: right;
-  clear: left;
-  clear: right;
-}
-
-.from-other {
-  float: left;
-  clear: left;
-  clear: right;
 }
