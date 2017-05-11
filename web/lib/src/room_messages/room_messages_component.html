@@ -1,0 +1,8 @@
+<div *ngFor="let message of messages">
+    <div class="message from-me fg-material short-shadow" *ngIf="isFromMe(message)">
+      <p>Message from me</p>
+    </div>
+    <div class="message from-other fg-material short-shadow" *ngIf="!isFromMe(message)">
+      <p>Message from you</p>
+    </div>
+</div>

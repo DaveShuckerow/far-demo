@@ -1,0 +1,17 @@
+.message {
+  padding: 8px 12px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.from-me {
+  float: right;
+  clear: left;
+  clear: right;
+}
+
+.from-other {
+  float: left;
+  clear: left;
+  clear: right;
+}
