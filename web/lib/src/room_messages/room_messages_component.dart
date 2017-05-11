@@ -25,6 +25,15 @@ class RoomMessagesComponent {
     new Message(new Int64(4), '', 'It`s just so busy.', me, currentRoom),
     new Message(new Int64(5), '', 'Interesting.  I`d love to be so busy.', you,
         currentRoom),
+    new Message(Int64.ZERO, '', 'Hello, what\'s up?', me, currentRoom),
+    new Message(
+        Int64.ONE, '', 'Not much, what`s up wit you?', you, currentRoom),
+    new Message(Int64.TWO, '', 'Oh everything.', me, currentRoom),
+    new Message(new Int64(3), '', 'We`re writing all this code and stuff', me,
+        currentRoom),
+    new Message(new Int64(4), '', 'It`s just so busy.', me, currentRoom),
+    new Message(new Int64(5), '', 'Interesting.  I`d love to be so busy.', you,
+        currentRoom),
   ];
 
   RoomMessagesComponent();

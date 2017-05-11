@@ -30,3 +30,7 @@ body {
 .bg-material {
   background-color: #E7E7E7;
 }
+
+.faded-text {
+  color: #9A9A9A
+}

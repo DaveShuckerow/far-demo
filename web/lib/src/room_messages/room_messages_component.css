@@ -1,11 +1,13 @@
 .message {
-  padding: 8px 12px;
   display: inline-block;
+  padding: 0px 12px;
   margin-bottom: 20px;
   float: left;
   clear: both;
+  text-align: left;
 }
 
 .from-me {
   float: right;
+  text-align: right;
 }
