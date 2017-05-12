@@ -1,4 +1,5 @@
 import 'package:fixnum/fixnum.dart';
+import 'package:quiver/core.dart';
 
 import 'room.dart';
 import 'user.dart';
@@ -21,4 +22,14 @@ class MessageRef {
   final RoomRef room;
 
   MessageRef(this.id, this.room);
+
+  @override
+  bool operator ==(Object other) {
+    return other is MessageRef &&
+        this.id == other?.id &&
+        this.room == other?.room;
+  }
+
+  @override
+  int get hashCode => hash2(id.hashCode, room.hashCode);
 }

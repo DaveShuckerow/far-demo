@@ -21,4 +21,12 @@ class RoomRef {
   final String name;
 
   RoomRef(this.id, this.name);
+
+  @override
+  bool operator ==(Object other) {
+    return other is RoomRef && this.id == other?.id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }

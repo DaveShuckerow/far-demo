@@ -33,12 +33,3 @@ abstract class Store<P, D> {
   final Map<P, D> _cache = {};
   final Map<Object, VoidCallback> _subscribers = {};
 }
-
-/// A wrapper of all subscription-related behavior to a store.
-// TODO: create Flutter and Angular-specific subscribers that adapt the
-// subscription to the framework's lifecycle.
-abstract class StoreSubscriber {
-  void onStoreUpdate();
-
-  List<Store> get subscriptions;
-}

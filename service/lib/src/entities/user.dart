@@ -15,4 +15,12 @@ class UserRef {
   final String name;
 
   UserRef(this.id, this.name);
+
+  @override
+  bool operator ==(Object other) {
+    return other is UserRef && this.id == other?.id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }
