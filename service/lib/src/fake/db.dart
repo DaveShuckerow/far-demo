@@ -79,7 +79,7 @@ List<Message> _room0Messages = [
   new Message(
     new Int64(6),
     _rref(_room0),
-    _uref(_baz),
+    _uref(_bar),
     'Aliquam porttitor mauris sit amet orci.',
   ),
   new Message(
