@@ -14,6 +14,7 @@ abstract class Store<P, D> {
     if (_cache[param] == null) {
       load(param).then((data) {
         _cache[param] = data;
+        notify();
       });
     }
     return _cache[param];
@@ -21,6 +22,13 @@ abstract class Store<P, D> {
 
   @protected
   Future<D> load(P param);
+
+  @protected
+  void notify() {
+    for (var subscriber in _subscribers.keys) {
+      _subscribers[subscriber]();
+    }
+  }
 
   void subscribe(Object subscriber, VoidCallback onData) {
     _subscribers[subscriber] = onData;

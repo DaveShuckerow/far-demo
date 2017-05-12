@@ -23,7 +23,7 @@ Map<Int64, Room> rooms = {
 User _foo = new User(Int64.ZERO, 'Foo',
     [new RoomRef(Int64.ZERO, 'Room 0'), new RoomRef(Int64.ONE, 'First Room')]);
 User _bar = new User(Int64.ONE, 'Bar', [new RoomRef(Int64.ZERO, 'Room 0')]);
-User _baz = new User(Int64.ZERO, 'Baz',
+User _baz = new User(Int64.TWO, 'Baz',
     [new RoomRef(Int64.ZERO, 'Room 0'), new RoomRef(Int64.ONE, 'First Room')]);
 
 UserRef _uref(User user) => new UserRef(user.id, user.name);

@@ -3,3 +3,11 @@ dependencies:
   fixnum: any
   meta: any
   quiver: any
+  angular2: ^2.2.0
+transformers:
+- angular2:
+    platform_directives:
+    - 'package:angular2/common.dart#COMMON_DIRECTIVES'
+    platform_pipes:
+    - 'package:angular2/common.dart#COMMON_PIPES'
+    entry_points: web/main.dart

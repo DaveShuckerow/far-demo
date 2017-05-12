@@ -1,5 +1,6 @@
 import 'package:angular2/core.dart';
 import 'package:github.daveshuckerow.chat.service/service.dart';
+import 'package:meta/meta.dart';
 
 /// Handler for subscriptions to the app's state.
 ///
@@ -14,13 +15,18 @@ abstract class SubscribingComponent implements OnInit, OnDestroy {
 
   void refresh();
 
+  @mustCallSuper
   @override
   void ngOnInit() {
+    print('Init');
     for (var store in subscriptions) {
       store.subscribe(this, refresh);
     }
+    // Try to load data.
+    refresh();
   }
 
+  @mustCallSuper
   @override
   void ngOnDestroy() {
     for (var store in subscriptions) {
