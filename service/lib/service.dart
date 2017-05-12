@@ -4,5 +4,7 @@ export 'src/entities/user.dart';
 
 export 'src/platform/platform.dart';
 
-export 'src/stores/store.dart';
-export 'src/stores/user_store.dart';
+export 'src/state/store.dart';
+export 'src/state/message_store.dart';
+export 'src/state/room_store.dart';
+export 'src/state/user_store.dart';

@@ -1,4 +1,7 @@
-import 'package:fixnum/fixnum.dart';
+import 'dart:async';
+import 'package:meta/meta.dart';
+
+typedef void VoidCallback();
 
 /// A simple version of a store.
 ///
@@ -7,9 +10,28 @@ import 'package:fixnum/fixnum.dart';
 ///
 /// The store provides a builtin cache system.
 abstract class Store<P, D> {
-  Response<D> get(P param);
+  D get(P param) {
+    if (_cache[param] == null) {
+      load(param).then((data) {
+        _cache[param] = data;
+      });
+    }
+    return _cache[param];
+  }
 
-  Map<P, Response<D>> _cache = <P, Response<D>>{};
+  @protected
+  Future<D> load(P param);
+
+  void subscribe(Object subscriber, VoidCallback onData) {
+    _subscribers[subscriber] = onData;
+  }
+
+  void unsubscribe(Object subscriber) {
+    _subscribers.remove(subscriber);
+  }
+
+  final Map<P, D> _cache = {};
+  final Map<Object, VoidCallback> _subscribers = {};
 }
 
 /// A wrapper of all subscription-related behavior to a store.
@@ -19,17 +41,4 @@ abstract class StoreSubscriber {
   void onStoreUpdate();
 
   List<Store> get subscriptions;
-}
-
-class Response<D> {
-  final D data;
-  final Error error;
-
-  Response(this.data, this.error);
-
-  bool get isLoading => data == null && error == null;
-
-  bool get isLoaded => data != null && error == null;
-
-  bool get isError => error != null;
 }

@@ -1,3 +1,5 @@
 name: 'github.daveshuckerow.chat.service'
 dependencies:
   fixnum: any
+  meta: any
+  quiver: any
