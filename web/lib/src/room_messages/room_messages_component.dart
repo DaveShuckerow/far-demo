@@ -37,7 +37,7 @@ class RoomMessagesComponent extends SubscribingComponent
     if (room == null) return;
     print(room.name);
     messages = <Message>[];
-    for (var i = earliestMessageIndex; i < room.messageCount; i++) {
+    for (var i = earliestMessageIndex; i < room.messageCount.toInt(); i++) {
       var message = messageStore.get(new MessageRef(new Int64(i), roomRef));
       messages.add(message);
       print('Message: ${message?.sender?.name} ${message?.contents}');

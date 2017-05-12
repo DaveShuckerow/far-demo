@@ -31,5 +31,5 @@ class MessageRef {
   }
 
   @override
-  int get hashCode => hash2(id.hashCode, room.hashCode);
+  int get hashCode => hash2(id, room);
 }
