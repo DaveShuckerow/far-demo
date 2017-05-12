@@ -1,6 +1,6 @@
-<div *ngFor="let message of messages">
-    <div class="message fg-material short-shadow" *ngIf="message != null" [class.from-me]="isFromMe(message)" >
-      <p class="faded-text">{{message.sender.name}}</p>
-      <p>{{message.contents}}</p>
-    </div>
+<div class *ngFor="let message of messages">
+  <div class="message fg-material short-shadow" *ngIf="message != null" [class.from-me]="isFromMe(message)" >
+    <p class="faded-text">{{message.sender.name}}</p>
+    <p>{{message.contents}}</p>
+  </div>
 </div>

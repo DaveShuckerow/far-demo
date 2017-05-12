@@ -1,21 +1,23 @@
 .container {
-  display: table;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .header {
-  height: 48px;
+  height: 56px;
   padding: 8px;
+  vertical-align: middle;
 }
 
 .page {
-  display: table-row;
-  height: 100%;
-  width: 100;
+  height: calc(100% - 56px);
+  width: 100%;
+
 }
 
 .content {
-  display: table-cell;
+  height: calc(100% - 56px);
+  overflow: auto;
   padding: 20px;
 }
