@@ -38,6 +38,11 @@ abstract class Store<P, D> {
     _subscribers.remove(subscriber);
   }
 
+  void clearCache() {
+    _cache.clear();
+    notify();
+  }
+
   final Map<P, D> _cache = {};
   final Map<Object, VoidCallback> _subscribers = {};
 }
