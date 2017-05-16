@@ -40,6 +40,7 @@ abstract class Store<P, D> {
 
   void clearCache() {
     _cache.clear();
+    print("notifying!");
     notify();
   }
 

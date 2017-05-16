@@ -3,8 +3,6 @@ import 'package:angular2/core.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:github.daveshuckerow.chat.service/service.dart';
 import 'package:github.daveshuckerow.chat.service/fake.dart';
-
-import 'package:github.daveshuckerow.chat.web/src/module/module.dart';
 import 'package:github.daveshuckerow.chat.web/src/state/subscribing_component.dart';
 
 @Component(
@@ -12,7 +10,6 @@ import 'package:github.daveshuckerow.chat.web/src/state/subscribing_component.da
   templateUrl: 'room_messages_component.html',
   styleUrls: const ['room_messages_component.css'],
   directives: const [NgFor, NgIf],
-  providers: bindings,
 )
 class RoomMessagesComponent extends SubscribingComponent
     implements OnInit, OnDestroy {
@@ -35,12 +32,12 @@ class RoomMessagesComponent extends SubscribingComponent
     print('loading data');
     var room = roomStore.get(roomRef);
     if (room == null) return;
-    print(room.name);
+    // print(room.name);
     messages = <Message>[];
     for (var i = earliestMessageIndex; i < room.messageCount.toInt(); i++) {
       var message = messageStore.get(new MessageRef(new Int64(i), roomRef));
       messages.add(message);
-      print('Message: ${message?.sender?.name} ${message?.contents}');
+      // print('Message: ${message?.sender?.name} ${message?.contents}');
     }
   }
 }
