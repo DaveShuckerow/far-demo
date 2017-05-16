@@ -6,6 +6,10 @@ import 'package:angular2/core.dart';
   styleUrls: const ['message_input.css'],
 )
 class MessageInputComponent {
-  @override
-  void refresh() {}
+  String messageText = '';
+
+  void send() {
+    print('value sending $messageText');
+    messageText = '';
+  }
 }
