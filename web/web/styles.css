@@ -12,11 +12,11 @@ body {
 }
 
 .tall-shadow {
-  box-shadow: 0 8px 7px 0 rgba(0,0,0,0.26);
+  box-shadow: 0px 4px 7px 2px rgba(0,0,0,0.26);
 }
 
 .short-shadow {
-  box-shadow: 0 4px 3px 0 rgba(0,0,0,0.26);
+  box-shadow: 0px 2px 3px 2px rgba(0,0,0,0.26);
 }
 
 .primary-material {
