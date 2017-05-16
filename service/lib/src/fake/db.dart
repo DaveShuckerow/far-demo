@@ -42,8 +42,8 @@ Room _room0 = new Room(
 );
 
 Room _room1 = new Room(
-  Int64.ZERO,
-  'Room 0',
+  Int64.ONE,
+  'Room 1',
   [new UserRef(Int64.ZERO, 'Foo'), new UserRef(Int64.TWO, 'Baz')],
   new Int64(12),
 );
