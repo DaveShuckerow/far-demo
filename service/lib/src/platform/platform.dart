@@ -7,4 +7,9 @@
 ///
 /// The Flutter and Angular libraries will be responsible for providing an
 /// implementation of Platform.
-abstract class Platform {}
+
+import 'package:github.daveshuckerow.chat.service/src/entities/user.dart';
+
+abstract class Platform {
+  User get currentUser;
+}

@@ -15,14 +15,14 @@ class RoomMessagesComponent extends SubscribingComponent
     implements OnInit, OnDestroy {
   final RoomStore roomStore;
   final MessageStore messageStore;
+  final User currentUser;
 
-  UserRef me = users[Int64.ZERO];
-  RoomRef roomRef = rooms[Int64.ZERO];
-  int earliestMessageIndex = 0;
+  @Input()
+  RoomRef roomRef;
 
   List<Message> messages;
 
-  RoomMessagesComponent(this.roomStore, this.messageStore)
+  RoomMessagesComponent(this.roomStore, this.messageStore, this.currentUser)
       : super([roomStore, messageStore]);
 
   bool isFromMe(Message message) => message?.sender == me;
@@ -32,12 +32,10 @@ class RoomMessagesComponent extends SubscribingComponent
     print('loading data');
     var room = roomStore.get(roomRef);
     if (room == null) return;
-    // print(room.name);
     messages = <Message>[];
-    for (var i = earliestMessageIndex; i < room.messageCount.toInt(); i++) {
+    for (var i = 0; i < room.messageCount.toInt(); i++) {
       var message = messageStore.get(new MessageRef(new Int64(i), roomRef));
       messages.add(message);
-      // print('Message: ${message?.sender?.name} ${message?.contents}');
     }
   }
 }
