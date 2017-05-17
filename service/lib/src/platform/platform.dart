@@ -1,3 +1,6 @@
+import 'package:angular2/di.dart';
+import 'package:github.daveshuckerow.chat.service/src/entities/user.dart';
+
 /// Locator for all service functionality from the platform.
 ///
 /// Having this interface around allows us to depend on platform-specific
@@ -7,8 +10,6 @@
 ///
 /// The Flutter and Angular libraries will be responsible for providing an
 /// implementation of Platform.
-
-import 'package:github.daveshuckerow.chat.service/src/entities/user.dart';
 
 abstract class Platform {
   User get currentUser;

@@ -1,8 +1,9 @@
 import 'package:angular2/common.dart';
 import 'package:angular2/core.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:github.daveshuckerow.chat.service/service.dart';
 import 'package:github.daveshuckerow.chat.service/fake.dart';
+import 'package:github.daveshuckerow.chat.service/service.dart';
+import 'package:github.daveshuckerow.chat.web/src/module/platform.dart';
 import 'package:github.daveshuckerow.chat.web/src/state/subscribing_component.dart';
 
 @Component(
@@ -25,10 +26,11 @@ class RoomMessagesComponent extends SubscribingComponent
   RoomMessagesComponent(this.roomStore, this.messageStore, this.currentUser)
       : super([roomStore, messageStore]);
 
-  bool isFromMe(Message message) => message?.sender == me;
+  bool isFromMe(Message message) => message?.sender == currentUser;
 
   @override
   void refresh() {
+    if (roomRef == null) return;
     print('loading data');
     var room = roomStore.get(roomRef);
     if (room == null) return;
