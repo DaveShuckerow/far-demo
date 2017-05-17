@@ -3,12 +3,13 @@ import 'package:angular2/di.dart';
 
 import '../entities/room.dart';
 import '../fake/db.dart';
+import 'message_mutator.dart';
 import 'store.dart';
 
 @Injectable()
 class RoomStore extends Store<RoomRef, Room> {
-  RoomStore() {
-    print('Building a RoomStore');
+  RoomStore(MessageMutator messageMutator) {
+    messageMutator.subscribe(this, clearCache);
   }
 
   @override

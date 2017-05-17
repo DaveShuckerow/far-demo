@@ -5,15 +5,10 @@ import 'mutator.dart';
 import '../entities/message.dart';
 import '../entities/room.dart';
 import '../fake/db.dart';
-import '../state/room_store.dart';
 
 /// Adds a message to a room.
 @Injectable()
 class MessageMutator extends Mutator<Message> {
-  final RoomStore roomStore;
-
-  MessageMutator(this.roomStore) : super([roomStore]);
-
   @override
   Future<Error> submit(Message newEntity) async {
     await new Future.delayed(const Duration(seconds: 2));
@@ -27,7 +22,7 @@ class MessageMutator extends Mutator<Message> {
     messages[newEntity.room.id].add(new Message(updatedRoom.messageCount,
         newEntity.room, newEntity.sender, newEntity.contents));
     rooms[newEntity.room.id] = updatedRoom;
-    roomStore.clearCache();
+    notify();
     return null;
   }
 }

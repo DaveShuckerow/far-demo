@@ -1,10 +1,7 @@
 import 'dart:async';
-import 'store.dart';
 
-abstract class Mutator<T> {
-  final List<Store> toInvalidate;
+import 'publisher.dart';
 
-  Mutator(this.toInvalidate);
-
-  Future<Error> submit(T newEntity);
+abstract class Mutator<D> extends Publisher {
+  Future<Error> submit(D newEntity);
 }
