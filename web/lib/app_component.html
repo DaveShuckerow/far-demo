@@ -3,11 +3,11 @@
       <h1>Chatty</h1>
   </header>
   <div class="nav short-shadow fg-material">
-    <room-list></room-list>
+    <room-list #roomList></room-list>
   </div>
   <section class="page">
     <div class="content">
-      <room-messages></room-messages>
+      <room-messages [roomRef]="roomList?.selectedRoom"></room-messages>
     </div>
     <div class="content-footer">
       <message-input></message-input>

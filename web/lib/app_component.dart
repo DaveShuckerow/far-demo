@@ -9,9 +9,12 @@ import 'package:github.daveshuckerow.chat.web/src/room_messages/room_messages_co
   templateUrl: 'app_component.html',
   styleUrls: const ['app_component.css'],
   directives: const [
-    RoomMessagesComponent,
     MessageInputComponent,
     RoomListComponent,
+    RoomMessagesComponent,
   ],
 )
-class AppComponent {}
+class AppComponent {
+  @ViewChild('roomList')
+  RoomListComponent roomList;
+}

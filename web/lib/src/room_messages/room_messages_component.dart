@@ -1,9 +1,7 @@
 import 'package:angular2/common.dart';
 import 'package:angular2/core.dart';
 import 'package:fixnum/fixnum.dart';
-import 'package:github.daveshuckerow.chat.service/fake.dart';
 import 'package:github.daveshuckerow.chat.service/service.dart';
-import 'package:github.daveshuckerow.chat.web/src/module/platform.dart';
 import 'package:github.daveshuckerow.chat.web/src/state/subscribing_component.dart';
 
 @Component(
@@ -19,7 +17,15 @@ class RoomMessagesComponent extends SubscribingComponent
   final User currentUser;
 
   @Input()
-  RoomRef roomRef;
+  set roomRef(RoomRef ref) {
+    _roomRef = ref;
+    print('setting room ref to $ref');
+    refresh();
+  }
+
+  RoomRef get roomRef => _roomRef;
+
+  RoomRef _roomRef;
 
   List<Message> messages;
 
@@ -31,7 +37,7 @@ class RoomMessagesComponent extends SubscribingComponent
   @override
   void refresh() {
     if (roomRef == null) return;
-    print('loading data');
+    print('loading data for room ${roomRef.id}');
     var room = roomStore.get(roomRef);
     if (room == null) return;
     messages = <Message>[];

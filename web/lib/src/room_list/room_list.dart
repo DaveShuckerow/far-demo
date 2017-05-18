@@ -18,5 +18,7 @@ class RoomListComponent {
     print('User: ${currentUser != null}');
   }
 
+  RoomRef get selectedRoom => roomRefs[0];
+
   List<RoomRef> get roomRefs => currentUser?.rooms;
 }
