@@ -1,4 +1,3 @@
-import 'package:angular2/di.dart';
 import 'package:fixnum/fixnum.dart';
 import 'room.dart';
 

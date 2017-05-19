@@ -1,4 +1,3 @@
-import 'package:angular2/di.dart';
 import 'package:github.daveshuckerow.chat.service/src/entities/user.dart';
 
 /// Locator for all service functionality from the platform.
