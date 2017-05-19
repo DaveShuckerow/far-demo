@@ -4,6 +4,7 @@ environment:
 dependencies:
   angular2: ^2.2.0
   fixnum: any
+  firebase: ^3.0.0
   github.daveshuckerow.chat.service:
     path: ../service
 dev_dependencies:
