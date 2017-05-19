@@ -6,8 +6,8 @@ import 'package:github.daveshuckerow.chat.web/src/components/room_messages/room_
 
 @Component(
   selector: 'chat-app',
-  templateUrl: 'app_component.html',
-  styleUrls: const ['app_component.css'],
+  templateUrl: 'app.html',
+  styleUrls: const ['app.css'],
   directives: const [
     MessageInputComponent,
     RoomMessagesComponent,

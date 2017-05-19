@@ -7,8 +7,8 @@ import 'package:github.daveshuckerow.chat.web/src/state/subscribing_component.da
 
 @Component(
   selector: 'room-messages',
-  templateUrl: 'room_messages_component.html',
-  styleUrls: const ['room_messages_component.css'],
+  templateUrl: 'room_messages.html',
+  styleUrls: const ['room_messages.css'],
   directives: const [NgFor, NgIf],
 )
 class RoomMessagesComponent extends SubscribingComponent
