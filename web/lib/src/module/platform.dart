@@ -77,7 +77,7 @@ class PlatformImplFake extends Platform {
   UserRef get currentUser => users[Int64.ZERO];
 
   @override
-  Stream<String> listen(String request) {
+  Stream<String> listen(String request, {int limitToLast}) {
     return null;
   }
 

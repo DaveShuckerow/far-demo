@@ -22,9 +22,7 @@ class MessageInputComponent {
   void send() {
     print('value sending $messageText');
     submitting = true;
-    messageMutator
-        .submit(new Message(Int64.ZERO, roomRef, me, messageText))
-        .then((e) {
+    messageMutator.submit(new Message('', roomRef, me, messageText)).then((e) {
       if (e != null) return;
       messageText = '';
       submitting = false;

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:fixnum/fixnum.dart';
 
 import 'message.dart';
 import 'user.dart';
@@ -15,7 +14,7 @@ class Room extends RoomRef {
 
   Room.fromJson(Map<String, Object> json)
       : this(
-          Int64.parseInt(json['uid']),
+          json['uid'],
           json['name'],
           (json['members'] as List)
               .map((u) => new UserRef.fromJson(u))
@@ -36,8 +35,7 @@ class RoomRef {
 
   RoomRef(this.uid, this.name);
 
-  RoomRef.fromJson(Map<String, Object> json)
-      : this(Int64.parseInt(json['uid']), json['name']);
+  RoomRef.fromJson(Map<String, Object> json) : this(json['uid'], json['name']);
   Map<String, String> toJson() => {
         'uid': '$uid',
         'name': name,

@@ -14,7 +14,7 @@ class RoomStore extends Store<RoomRef, Room> {
 
   @override
   Stream<Room> load(RoomRef param) async* {
-    await for (var json in _platform.listen('rooms/${param.id}')) {
+    await for (var json in _platform.listen('rooms/${param.uid}')) {
       yield new Room.fromJson(json);
     }
   }
@@ -29,7 +29,7 @@ class RoomStoreFake extends Store<RoomRef, Room> implements RoomStore {
   @override
   Stream<Room> load(RoomRef param) async* {
     await new Future.delayed(const Duration(seconds: 1));
-    yield rooms[param.id];
+    yield rooms[param.uid];
   }
 
   @override
