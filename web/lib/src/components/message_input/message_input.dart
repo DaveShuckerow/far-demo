@@ -2,30 +2,31 @@ import 'package:angular2/core.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:github.daveshuckerow.chat.service/fake.dart';
 import 'package:github.daveshuckerow.chat.service/service.dart';
+import 'package:github.daveshuckerow.chat.web/src/module/platform.dart';
 
 @Component(
   selector: 'message-input',
   templateUrl: 'message_input.html',
   styleUrls: const ['message_input.css'],
+  providers: platformBindings,
 )
 class MessageInputComponent {
   final MessageMutator messageMutator;
+  final UserRef currentUser;
 
-  bool submitting = false;
   String messageText = '';
 
-  UserRef me = users[Int64.ZERO];
-  RoomRef roomRef = rooms[Int64.ZERO];
+  RoomRef roomRef = new RoomRef("default", "General Discussion");
 
-  MessageInputComponent(this.messageMutator);
+  MessageInputComponent(this.messageMutator, this.currentUser);
 
   void send() {
     print('value sending $messageText');
-    submitting = true;
-    messageMutator.submit(new Message('', roomRef, me, messageText)).then((e) {
+    messageMutator
+        .submit(new Message('', roomRef, currentUser, messageText))
+        .then((e) {
       if (e != null) return;
       messageText = '';
-      submitting = false;
     });
   }
 }

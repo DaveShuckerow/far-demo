@@ -11,7 +11,8 @@ const fakeBindings = const [
   const Provider(UserStore, useClass: UserStoreFake),
   RoomStoreFake,
   const Provider(RoomStore, useClass: RoomStoreFake),
-  MessageMutator,
+  MessageMutatorFake,
+  const Provider(MessageMutator, useClass: MessageMutatorFake),
 ];
 
 const bindings = const [

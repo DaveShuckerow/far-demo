@@ -23,15 +23,13 @@ class Message extends MessageRef {
           new RoomRef.fromJson(json['room'] as Map<String, Object>),
           new UserRef.fromJson(json['sender'] as Map<String, Object>),
           json['contents'],
-          Int64.parseInt(json['timestamp']),
         );
 
-  Map<String, String> toJson() => {
+  Map<String, Object> toJson() => {
         'uid': '$uid',
-        'room': JSON.encode(room),
-        'sender': JSON.encode(sender),
+        'room': room.toJson(),
+        'sender': sender.toJson(),
         'contents': contents,
-        'timestamp': '$timestamp',
       };
 }
 
@@ -48,9 +46,9 @@ class MessageRef {
       : this(json['uid'],
             new RoomRef.fromJson(json['room'] as Map<String, Object>));
 
-  Map<String, String> toJson() => {
+  Map<String, Object> toJson() => {
         'uid': '$uid',
-        'room': JSON.encode(room),
+        'room': room.toJson(),
       };
 
   @override
