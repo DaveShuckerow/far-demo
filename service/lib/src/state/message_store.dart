@@ -13,14 +13,9 @@ class MessageStore extends Store<MessageRef, Message> {
   MessageStore(this._platform);
 
   @override
-  Future<Message> load(MessageRef param) async {
-    var response = await _platform.get('messages/${param.room.id}/${param.id}');
-    if (response.statusCode == 200) {
-      var json = JSON.decode(response.body);
-      return new Message.fromJson(json);
-    } else {
-      print('Error: ${response.body}');
-      return null;
+  Stream<Message> load(MessageRef param) async* {
+    await for (var json in _platform.listen('messages/${param.room.id}')) {
+      yield new Message.fromJson(json);
     }
   }
 }

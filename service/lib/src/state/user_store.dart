@@ -8,8 +8,8 @@ import 'store.dart';
 @Injectable()
 class UserStore extends Store<UserRef, User> {
   @override
-  Future<User> load(UserRef param) async {
+  Stream<User> load(UserRef param) async* {
     await new Future.delayed(const Duration(seconds: 1));
-    return users[param.uid];
+    yield users[param.uid];
   }
 }

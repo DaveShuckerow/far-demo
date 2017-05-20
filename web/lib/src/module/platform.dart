@@ -40,16 +40,21 @@ class PlatformImpl extends Platform {
       ? null
       : new UserRef(userCredentials.user.uid, userCredentials.user.displayName);
 
-  @override
-  HttpConfig get httpConfig => userCredentials?.credential == null
-      ? null
-      : new HttpConfig(
-          FirebaseConfig.databaseURL, userCredentials.credential.accessToken);
+  Stream<Object> get(String request, {int limitToLast: 50}) {
+    return fb
+        .database()
+        .refFromURL('${httpConfig.databaseUrl}$request')
+        .limitToLast(limitToLast)
+        .onValue
+        .map((data) {
+      return data.snapshot.exportVal() as Object;
+    });
+  }
 }
 
 @Injectable()
 class PlatformImplFake extends Platform {
-  PlatformImplFake();
+  PlatformImplFake() {}
 
   @override
   bool get initialized => true;
@@ -58,7 +63,14 @@ class PlatformImplFake extends Platform {
   UserRef get currentUser => users[Int64.ZERO];
 
   @override
-  HttpConfig get httpConfig => null;
+  Stream<String> listen(String request) {
+    return null;
+  }
+
+  @override
+  push(String request, Map<String, String> json) {
+    return null;
+  }
 }
 
 @Injectable()

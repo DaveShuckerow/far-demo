@@ -16,14 +16,14 @@ class RoomStore extends Store<RoomRef, Room> {
   }
 
   @override
-  Future<Room> load(RoomRef param) async {
+  Stream<Room> load(RoomRef param) async* {
     var response = await _platform.get('rooms/${param.id}');
     if (response.statusCode == 200) {
       var json = JSON.decode(response.body);
-      return new Room.fromJson(json);
+      yield new Room.fromJson(json);
     } else {
       print('Error: ${response.body}');
-      return null;
+      yield null;
     }
   }
 }

@@ -8,7 +8,8 @@ const fakeBindings = const [
   MessageStoreFake,
   const Provider(MessageStore, useClass: MessageStoreFake),
   UserStore,
-  RoomStore,
+  RoomStoreFake,
+  const Provider(RoomStore, useClass: RoomStoreFake),
   MessageMutator,
 ];
 

@@ -11,8 +11,10 @@ import 'user.dart';
 class Message extends MessageRef {
   final UserRef sender;
   final String contents;
+  final Int64 timestamp;
 
-  Message(Int64 id, RoomRef room, this.sender, this.contents) : super(id, room);
+  Message(Int64 id, RoomRef room, this.sender, this.contents, [this.timestamp])
+      : super(id, room);
 
   Message.fromJson(Map<String, Object> json)
       : this(
@@ -20,6 +22,7 @@ class Message extends MessageRef {
           new RoomRef.fromJson(json['room']),
           new UserRef.fromJson(json['sender']),
           json['contents'],
+          Int64.parseInt(json['timestamp']),
         );
 
   Map<String, String> toJson() => {
@@ -27,6 +30,7 @@ class Message extends MessageRef {
         'room': JSON.encode(room),
         'sender': JSON.encode(sender),
         'contents': contents,
+        'timestamp': '$timestamp',
       };
 }
 
