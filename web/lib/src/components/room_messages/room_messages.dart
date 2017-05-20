@@ -3,6 +3,7 @@ import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:github.daveshuckerow.chat.service/service.dart';
+import 'package:github.daveshuckerow.chat.web/src/module/platform.dart';
 import 'package:github.daveshuckerow.chat.web/src/state/subscribing_component.dart';
 
 @Component(
@@ -10,23 +11,23 @@ import 'package:github.daveshuckerow.chat.web/src/state/subscribing_component.da
   templateUrl: 'room_messages.html',
   styleUrls: const ['room_messages.css'],
   directives: const [NgFor, NgIf],
+  providers: platformBindings,
 )
 class RoomMessagesComponent extends SubscribingComponent
     implements OnInit, OnDestroy {
   final RoomStore roomStore;
   final MessageStore messageStore;
   final User currentUser;
-  final RouteParams routeParams;
 
   List<Message> messages;
 
-  RoomMessagesComponent(
-      this.roomStore, this.messageStore, this.currentUser, this.routeParams)
+  RoomMessagesComponent(this.roomStore, this.messageStore, this.currentUser)
       : super([roomStore, messageStore]);
 
   bool isFromMe(Message message) => message?.sender == currentUser;
 
-  int get _roomId => int.parse(routeParams.get('roomId'), onError: (_) => null);
+  int get _roomId =>
+      0; //int.parse(routeParams.get('roomId'), onError: (_) => null);
 
   @override
   void refresh() {

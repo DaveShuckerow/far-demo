@@ -7,6 +7,7 @@ dependencies:
   firebase: ^3.0.0
   github.daveshuckerow.chat.service:
     path: ../service
+  http: ^0.11.3
 dev_dependencies:
   browser: ^0.10.0
   dart_to_js_script_rewriter: ^1.0.1

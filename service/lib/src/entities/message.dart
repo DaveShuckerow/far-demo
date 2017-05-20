@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:fixnum/fixnum.dart';
 import 'package:quiver/core.dart';
 
@@ -12,6 +13,21 @@ class Message extends MessageRef {
   final String contents;
 
   Message(Int64 id, RoomRef room, this.sender, this.contents) : super(id, room);
+
+  Message.fromJson(Map<String, Object> json)
+      : this(
+          json['id'],
+          new RoomRef.fromJson(json['room']),
+          new UserRef.fromJson(json['sender']),
+          json['contents'],
+        );
+
+  Map<String, String> toJson() => {
+        'id': '$id',
+        'room': JSON.encode(room),
+        'sender': JSON.encode(sender),
+        'contents': contents,
+      };
 }
 
 /// A reference to a [Message].
@@ -22,6 +38,14 @@ class MessageRef {
   final RoomRef room;
 
   MessageRef(this.id, this.room);
+
+  MessageRef.fromJson(Map<String, Object> json)
+      : this(json['id'], new RoomRef.fromJson(json['room']));
+
+  Map<String, String> toJson() => {
+        'id': '$id',
+        'room': JSON.encode(room),
+      };
 
   @override
   bool operator ==(Object other) {

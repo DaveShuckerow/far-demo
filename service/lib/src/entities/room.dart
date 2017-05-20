@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:fixnum/fixnum.dart';
 
 import 'message.dart';
@@ -13,6 +14,23 @@ class Room extends RoomRef {
 
   Room(Int64 id, String name, this.members, this.messageCount)
       : super(id, name);
+
+  Room.fromJson(Map<String, Object> json)
+      : this(
+          Int64.parseInt(json['id']),
+          json['name'],
+          (json['members'] as List)
+              .map((u) => new UserRef.fromJson(u))
+              .toList(),
+          Int64.parseInt(json['messageCount']),
+        );
+
+  Map<String, String> toJson() => {
+        'id': '$id',
+        'name': name,
+        'members': JSON.encode(members),
+        'messageCount': '$messageCount',
+      };
 }
 
 /// A reference to a [Room] by id with its name for convenience.
@@ -21,6 +39,13 @@ class RoomRef {
   final String name;
 
   RoomRef(this.id, this.name);
+
+  RoomRef.fromJson(Map<String, Object> json)
+      : this(Int64.parseInt(json['id']), json['name']);
+  Map<String, String> toJson() => {
+        'id': '$id',
+        'name': name,
+      };
 
   @override
   bool operator ==(Object other) {

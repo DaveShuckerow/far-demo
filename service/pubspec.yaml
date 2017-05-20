@@ -1,9 +1,10 @@
 name: 'github.daveshuckerow.chat.service'
 dependencies:
+  angular2: ^2.2.0
   fixnum: any
+  http: ^0.11.3
   meta: any
   quiver: any
-  angular2: ^2.2.0
 transformers:
 - angular2:
     platform_directives:

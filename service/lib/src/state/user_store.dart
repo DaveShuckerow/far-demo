@@ -10,6 +10,6 @@ class UserStore extends Store<UserRef, User> {
   @override
   Future<User> load(UserRef param) async {
     await new Future.delayed(const Duration(seconds: 1));
-    return users[param.id];
+    return users[param.uid];
   }
 }

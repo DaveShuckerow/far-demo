@@ -20,31 +20,27 @@ Map<Int64, Room> rooms = {
   Int64.ONE: _room1,
 };
 
-User _foo = new User(Int64.ZERO, 'Foo',
+User _foo = new User('0', 'Foo',
     [new RoomRef(Int64.ZERO, 'Room 0'), new RoomRef(Int64.ONE, 'First Room')]);
-User _bar = new User(Int64.ONE, 'Bar', [new RoomRef(Int64.ZERO, 'Room 0')]);
-User _baz = new User(Int64.TWO, 'Baz',
+User _bar = new User('1', 'Bar', [new RoomRef(Int64.ZERO, 'Room 0')]);
+User _baz = new User('2', 'Baz',
     [new RoomRef(Int64.ZERO, 'Room 0'), new RoomRef(Int64.ONE, 'First Room')]);
 
-UserRef _uref(User user) => new UserRef(user.id, user.name);
+UserRef _uref(User user) => new UserRef(user.uid, user.name);
 
 RoomRef _rref(Room room) => new RoomRef(room.id, room.name);
 
 Room _room0 = new Room(
   Int64.ZERO,
   'Room 0',
-  [
-    new UserRef(Int64.ZERO, 'Foo'),
-    new UserRef(Int64.ONE, 'Bar'),
-    new UserRef(Int64.TWO, 'Baz')
-  ],
+  [new UserRef('0', 'Foo'), new UserRef('1', 'Bar'), new UserRef('2', 'Baz')],
   new Int64(10),
 );
 
 Room _room1 = new Room(
   Int64.ONE,
   'Room 1',
-  [new UserRef(Int64.ZERO, 'Foo'), new UserRef(Int64.TWO, 'Baz')],
+  [new UserRef('0', 'Foo'), new UserRef('2', 'Baz')],
   new Int64(12),
 );
 

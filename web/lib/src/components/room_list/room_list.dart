@@ -1,7 +1,6 @@
 import 'package:angular2/common.dart';
 import 'package:angular2/core.dart';
 import 'package:github.daveshuckerow.chat.service/service.dart';
-import 'package:github.daveshuckerow.chat.web/src/module/platform.dart';
 
 @Component(
   selector: 'room-list',
@@ -12,8 +11,7 @@ import 'package:github.daveshuckerow.chat.web/src/module/platform.dart';
 class RoomListComponent {
   final User currentUser;
 
-  RoomListComponent(FakePlatformImpl platform)
-      : currentUser = platform.currentUser {
+  RoomListComponent(Platform platform) : currentUser = platform.currentUser {
     print(platform != null);
     print('User: ${currentUser != null}');
   }

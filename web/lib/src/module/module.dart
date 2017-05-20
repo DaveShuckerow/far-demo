@@ -3,9 +3,18 @@ import 'package:github.daveshuckerow.chat.service/service.dart';
 import 'platform.dart';
 
 const fakeBindings = const [
-  FakePlatformImpl,
-  const Provider(Platform, useClass: FakePlatformImpl),
-  platformBindings,
+  PlatformImplFake,
+  const Provider(Platform, useClass: PlatformImplFake),
+  MessageStoreFake,
+  const Provider(MessageStore, useClass: MessageStoreFake),
+  UserStore,
+  RoomStore,
+  MessageMutator,
+];
+
+const bindings = const [
+  PlatformImpl,
+  const Provider(Platform, useClass: PlatformImpl),
   MessageStore,
   UserStore,
   RoomStore,
