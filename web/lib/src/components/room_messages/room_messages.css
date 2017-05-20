@@ -1,9 +1,14 @@
+.container {
+  padding: 20px;
+}
+
 .message {
   padding: 0px 12px;
   margin-bottom: 20px;
   float: left;
   clear: both;
   text-align: left;
+  max-width: calc(100% - 256px - 144px);
 }
 
 .from-me {

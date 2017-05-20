@@ -1,11 +1,10 @@
 <div class="container" *ngIf="!initialized"><p>loading...</p></div>
 <div class="container bg-material" *ngIf="initialized">
   <header class="header primary-material tall-shadow">
+    <div style="display: flex;">
       <h1>Chatty</h1>
+    </div>
   </header>
-  <div class="nav short-shadow fg-material">
-    <room-list></room-list>
-  </div>
   <section class="page">
     <div class="content">
       <room-messages></room-messages>
@@ -14,4 +13,7 @@
       <message-input></message-input>
     </div>
   </section>
+  <div class="nav short-shadow fg-material">
+    <room-list></room-list>
+  </div>
 </div>
