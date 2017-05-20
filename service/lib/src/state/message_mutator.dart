@@ -5,6 +5,7 @@ import 'mutator.dart';
 import '../entities/message.dart';
 import '../entities/room.dart';
 import '../fake/db.dart';
+import 'package:fixnum/fixnum.dart';
 
 /// Adds a message to a room.
 @Injectable()
@@ -17,10 +18,9 @@ class MessageMutator extends Mutator<Message> {
       currentRoom.id,
       currentRoom.name,
       currentRoom.members,
-      currentRoom.messageCount + 1,
     );
-    messages[newEntity.room.id].add(new Message(updatedRoom.messageCount,
-        newEntity.room, newEntity.sender, newEntity.contents));
+    messages[newEntity.room.id].add(new Message(
+        Int64.ZERO, newEntity.room, newEntity.sender, newEntity.contents));
     rooms[newEntity.room.id] = updatedRoom;
     notify();
     return null;

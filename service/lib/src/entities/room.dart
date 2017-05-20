@@ -10,48 +10,44 @@ import 'user.dart';
 /// [Message]s that have been sent in the room.
 class Room extends RoomRef {
   final List<UserRef> members;
-  final Int64 messageCount;
 
-  Room(Int64 id, String name, this.members, this.messageCount)
-      : super(id, name);
+  Room(String uid, String name, this.members) : super(uid, name);
 
   Room.fromJson(Map<String, Object> json)
       : this(
-          Int64.parseInt(json['id']),
+          Int64.parseInt(json['uid']),
           json['name'],
           (json['members'] as List)
               .map((u) => new UserRef.fromJson(u))
               .toList(),
-          Int64.parseInt(json['messageCount']),
         );
 
   Map<String, String> toJson() => {
-        'id': '$id',
+        'uid': '$uid',
         'name': name,
         'members': JSON.encode(members),
-        'messageCount': '$messageCount',
       };
 }
 
 /// A reference to a [Room] by id with its name for convenience.
 class RoomRef {
-  final Int64 id;
+  final String uid;
   final String name;
 
-  RoomRef(this.id, this.name);
+  RoomRef(this.uid, this.name);
 
   RoomRef.fromJson(Map<String, Object> json)
-      : this(Int64.parseInt(json['id']), json['name']);
+      : this(Int64.parseInt(json['uid']), json['name']);
   Map<String, String> toJson() => {
-        'id': '$id',
+        'uid': '$uid',
         'name': name,
       };
 
   @override
   bool operator ==(Object other) {
-    return other is RoomRef && this.id == other?.id;
+    return other is RoomRef && this.uid == other?.uid;
   }
 
   @override
-  int get hashCode => id.hashCode;
+  int get hashCode => uid.hashCode;
 }

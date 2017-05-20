@@ -44,7 +44,7 @@ class PlatformImpl extends Platform {
       ? null
       : new UserRef(userCredentials.user.uid, userCredentials.user.displayName);
 
-  Stream<Object> listen(String request, {int limitToLast: 50}) {
+  Stream<Object> listen(String request, {int limitToLast}) {
     return fb
         .database()
         .refFromURL('${FirebaseConfig.databaseURL}/$request')

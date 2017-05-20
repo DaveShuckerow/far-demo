@@ -34,14 +34,12 @@ Room _room0 = new Room(
   Int64.ZERO,
   'Room 0',
   [new UserRef('0', 'Foo'), new UserRef('1', 'Bar'), new UserRef('2', 'Baz')],
-  new Int64(10),
 );
 
 Room _room1 = new Room(
   Int64.ONE,
   'Room 1',
   [new UserRef('0', 'Foo'), new UserRef('2', 'Baz')],
-  new Int64(12),
 );
 
 List<Message> _room0Messages = [

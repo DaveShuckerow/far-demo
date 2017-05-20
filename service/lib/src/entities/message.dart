@@ -13,12 +13,13 @@ class Message extends MessageRef {
   final String contents;
   final Int64 timestamp;
 
-  Message(Int64 id, RoomRef room, this.sender, this.contents, [this.timestamp])
-      : super(id, room);
+  Message(String uid, RoomRef room, this.sender, this.contents,
+      [this.timestamp])
+      : super(uid, room);
 
   Message.fromJson(Map<String, Object> json)
       : this(
-          json['id'],
+          json['uid'],
           new RoomRef.fromJson(json['room']),
           new UserRef.fromJson(json['sender']),
           json['contents'],
@@ -26,7 +27,7 @@ class Message extends MessageRef {
         );
 
   Map<String, String> toJson() => {
-        'id': '$id',
+        'uid': '$uid',
         'room': JSON.encode(room),
         'sender': JSON.encode(sender),
         'contents': contents,
@@ -38,26 +39,26 @@ class Message extends MessageRef {
 ///
 /// Includes the id and [RoomRef] to find the message.
 class MessageRef {
-  final Int64 id;
+  final String uid;
   final RoomRef room;
 
-  MessageRef(this.id, this.room);
+  MessageRef(this.uid, this.room);
 
   MessageRef.fromJson(Map<String, Object> json)
-      : this(json['id'], new RoomRef.fromJson(json['room']));
+      : this(json['uid'], new RoomRef.fromJson(json['room']));
 
   Map<String, String> toJson() => {
-        'id': '$id',
+        'uid': '$uid',
         'room': JSON.encode(room),
       };
 
   @override
   bool operator ==(Object other) {
     return other is MessageRef &&
-        this.id == other?.id &&
+        this.uid == other?.uid &&
         this.room == other?.room;
   }
 
   @override
-  int get hashCode => hash2(id, room);
+  int get hashCode => hash2(uid, room);
 }

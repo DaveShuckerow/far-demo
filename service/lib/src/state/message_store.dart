@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:angular2/di.dart';
 
 import '../entities/message.dart';
@@ -7,14 +6,29 @@ import '../fake/db.dart';
 import 'package:github.daveshuckerow.chat.service/service.dart';
 import 'store.dart';
 
+class MessageListParam {
+  final String roomId;
+  final int limit;
+
+  MessageListParam(this.roomId, {this.limit: 50});
+
+  @override
+  operator ==(Object other) =>
+      other is MessageListParam ? roomId == other.roomId : false;
+
+  @override
+  int get hashCode => roomId.hashCode;
+}
+
 @Injectable()
-class MessageStore extends Store<MessageRef, List<Message>> {
+class MessageStore extends Store<MessageListParam, List<Message>> {
   final Platform _platform;
   MessageStore(this._platform);
 
   @override
-  Stream<List<Message>> load(MessageRef param) async* {
-    await for (var json in _platform.listen('messages/${param.room.id}')) {
+  Stream<List<Message>> load(MessageListParam param) async* {
+    await for (var json in _platform.listen('messages/${param.roomId}',
+        limitToLast: param.limit)) {
       var messages = <Message>[];
       for (var jsonMessage in json as List) {
         messages.add(new Message.fromJson(jsonMessage));
@@ -25,12 +39,12 @@ class MessageStore extends Store<MessageRef, List<Message>> {
 }
 
 @Injectable()
-class MessageStoreFake extends Store<MessageRef, List<Message>>
+class MessageStoreFake extends Store<MessageListParam, List<Message>>
     implements MessageStore {
   @override
-  Stream<List<Message>> load(MessageRef param) async* {
+  Stream<List<Message>> load(MessageListParam param) async* {
     await new Future.delayed(const Duration(seconds: 1));
-    yield messages[param.room.id];
+    yield messages[param.roomId];
   }
 
   @override

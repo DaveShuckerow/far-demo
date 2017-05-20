@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:github.daveshuckerow.chat.service/src/entities/user.dart';
-import 'package:meta/meta.dart';
 
 /// Locator for all service functionality from the platform.
 ///
@@ -21,7 +20,7 @@ abstract class Platform {
   UserRef get currentUser;
 
   /// Retrieves data for [request] from the firebase database.
-  Stream<Object> listen(String request);
+  Stream<Object> listen(String request, {int limitToLast});
 
   /// Pushes data [json] to [request] in the firebase database.
   Future<Null> push(String request, Map<String, String> json);
