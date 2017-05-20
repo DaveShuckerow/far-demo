@@ -40,15 +40,25 @@ class PlatformImpl extends Platform {
       ? null
       : new UserRef(userCredentials.user.uid, userCredentials.user.displayName);
 
-  Stream<Object> get(String request, {int limitToLast: 50}) {
+  Stream<Object> listen(String request, {int limitToLast: 50}) {
     return fb
         .database()
-        .refFromURL('${httpConfig.databaseUrl}$request')
+        .refFromURL('${FirebaseConfig.databaseURL}$request')
         .limitToLast(limitToLast)
         .onValue
         .map((data) {
       return data.snapshot.exportVal() as Object;
     });
+  }
+
+  @override
+  push(String request, Map<String, String> json) {
+    return fb
+        .database()
+        .refFromURL('${FirebaseConfig.databaseURL}$request')
+        .push(json)
+        .future
+        .then((_) => null);
   }
 }
 

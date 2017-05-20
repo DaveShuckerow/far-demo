@@ -8,25 +8,29 @@ import 'package:github.daveshuckerow.chat.service/service.dart';
 import 'store.dart';
 
 @Injectable()
-class MessageStore extends Store<MessageRef, Message> {
+class MessageStore extends Store<MessageRef, List<Message>> {
   final Platform _platform;
   MessageStore(this._platform);
 
   @override
-  Stream<Message> load(MessageRef param) async* {
+  Stream<List<Message>> load(MessageRef param) async* {
     await for (var json in _platform.listen('messages/${param.room.id}')) {
-      yield new Message.fromJson(json);
+      var messages = <Message>[];
+      for (var jsonMessage in json as List) {
+        messages.add(new Message.fromJson(jsonMessage));
+      }
+      yield messages;
     }
   }
 }
 
 @Injectable()
-class MessageStoreFake extends Store<MessageRef, Message>
+class MessageStoreFake extends Store<MessageRef, List<Message>>
     implements MessageStore {
   @override
-  Future<Message> load(MessageRef param) async {
+  Stream<List<Message>> load(MessageRef param) async* {
     await new Future.delayed(const Duration(seconds: 1));
-    return messages[param.room.id][param.id.toInt()];
+    yield messages[param.room.id];
   }
 
   @override

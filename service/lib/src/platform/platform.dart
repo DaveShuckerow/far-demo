@@ -24,7 +24,7 @@ abstract class Platform {
   Stream<Object> listen(String request);
 
   /// Pushes data [json] to [request] in the firebase database.
-  push(String request, Map<String, String> json);
+  Future<Null> push(String request, Map<String, String> json);
 }
 
 /// Wrapper around Firebase credentials.
