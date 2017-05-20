@@ -25,7 +25,11 @@ class PlatformImpl extends Platform {
       storageBucket: FirebaseConfig.storageBucket,
     );
     var googleAuth = new fb.GoogleAuthProvider();
-    var firebaseAuth = fb.auth();
+    var firebaseAuth = fb.auth()
+      ..onAuthStateChanged.listen((authEvent) {
+        _initialized = true;
+      });
+    // Try explicitly signing in if necessary.
     userCredentials = await firebaseAuth.signInWithPopup(googleAuth);
     if (userCredentials != null) {
       _initialized = true;
@@ -43,7 +47,7 @@ class PlatformImpl extends Platform {
   Stream<Object> listen(String request, {int limitToLast: 50}) {
     return fb
         .database()
-        .refFromURL('${FirebaseConfig.databaseURL}$request')
+        .refFromURL('${FirebaseConfig.databaseURL}/$request')
         .limitToLast(limitToLast)
         .onValue
         .map((data) {
@@ -55,7 +59,7 @@ class PlatformImpl extends Platform {
   push(String request, Map<String, String> json) {
     return fb
         .database()
-        .refFromURL('${FirebaseConfig.databaseURL}$request')
+        .refFromURL('${FirebaseConfig.databaseURL}/$request')
         .push(json)
         .future
         .then((_) => null);
@@ -84,7 +88,7 @@ class PlatformImplFake extends Platform {
 }
 
 @Injectable()
-User getUser(PlatformImplFake platform) => platform.currentUser;
+User getUser(Platform platform) => platform.currentUser;
 
 const platformBindings = const [
   const Provider(User, useFactory: getUser),
