@@ -18,12 +18,15 @@ import 'package:github.daveshuckerow.chat.web/src/components/room_messages/room_
     RoomListComponent,
   ],
 )
-class AppComponent {
+class AppComponent implements OnInit {
   final Platform platform;
   bool initialized = false;
 
-  AppComponent(this.platform) {
-    platform.initialize.then((_) {
+  AppComponent(this.platform);
+
+  @override
+  ngOnInit() {
+    platform.initialize().then((_) {
       initialized = true;
     });
   }

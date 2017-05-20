@@ -12,11 +12,11 @@ class UserStore extends Store<UserRef, User> {
   UserStore(this._platform);
 
   @override
-  Stream<User> load(UserRef param) async* {
+  Stream<User> load(UserRef param) {
     print('loading user data for ${param.name}');
-    await for (var json in _platform.listen('/user/${param.uid}')) {
-      yield new User.fromJson(json);
-    }
+    return _platform.listen('/user/${param.uid}').map((json) {
+      return new User.fromJson(json as Map<String, Object>);
+    });
   }
 }
 

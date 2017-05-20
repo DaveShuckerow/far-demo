@@ -8,19 +8,21 @@ class User extends UserRef {
   final List<RoomRef> rooms;
   User(String uid, String name, this.rooms) : super(uid, name);
 
-  User.fromJson(Map<String, String> json)
+  User.fromJson(Map<String, Object> json)
       : this(
-            json['uid'],
-            json['name'],
-            (json['rooms'] as Map)
-                .keys
-                .map((jsonRoom) => new RoomRef.fromJson(jsonRoom))
-                .toList());
+          json['uid'],
+          json['name'],
+          (json['rooms'] as Map<String, Object>)
+              .values
+              .map((val) => new RoomRef.fromJson(val as Map<String, Object>))
+              .toList(),
+        );
 
   Map<String, Object> toJson() => {
         'uid': '$uid',
         'name': name,
-        'rooms': JSON.encode(rooms),
+        'rooms': new Map.fromIterables(
+            rooms.map((r) => r.uid), rooms.map((r) => r.toJson())),
       };
 }
 
@@ -32,7 +34,7 @@ class UserRef {
   UserRef(this.uid, this.name);
 
   UserRef.fromJson(Map<String, Object> json) : this(json['uid'], json['name']);
-  Map<String, String> toJson() => {
+  Map<String, Object> toJson() => {
         'uid': '$uid',
         'name': name,
       };

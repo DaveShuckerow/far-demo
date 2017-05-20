@@ -16,15 +16,17 @@ class Room extends RoomRef {
       : this(
           json['uid'],
           json['name'],
-          (json['members'] as List)
-              .map((u) => new UserRef.fromJson(u))
+          (json['members'] as Map<String, Object>)
+              .values
+              .map((u) => new UserRef.fromJson(u as Map<String, Object>))
               .toList(),
         );
 
-  Map<String, String> toJson() => {
+  Map<String, Object> toJson() => {
         'uid': '$uid',
         'name': name,
-        'members': JSON.encode(members),
+        'members': new Map.fromIterables(
+            members.map((m) => m.uid), members.map((m) => m.toJson())),
       };
 }
 
@@ -36,7 +38,7 @@ class RoomRef {
   RoomRef(this.uid, this.name);
 
   RoomRef.fromJson(Map<String, Object> json) : this(json['uid'], json['name']);
-  Map<String, String> toJson() => {
+  Map<String, Object> toJson() => {
         'uid': '$uid',
         'name': name,
       };

@@ -8,18 +8,11 @@ import 'package:github.daveshuckerow.chat.web/src/module/api.dart';
 
 @Injectable()
 class PlatformImpl extends Platform {
-  fb.UserCredential _userCredentials;
-
-  @override
-  Future<Null> get initialize => _initializer;
-
+  fb.Auth _firebaseAuth;
+  UserRef _userRef;
   Future<Null> _initializer;
 
   PlatformImpl() {
-    _initializer = _initialize();
-  }
-
-  Future<Null> _initialize() async {
     print('starting auth');
     fb.initializeApp(
       apiKey: FirebaseConfig.apiKey,
@@ -27,42 +20,54 @@ class PlatformImpl extends Platform {
       databaseURL: FirebaseConfig.databaseURL,
       storageBucket: FirebaseConfig.storageBucket,
     );
-    var googleAuth = new fb.GoogleAuthProvider();
-    var firebaseAuth = fb.auth()
-      ..onAuthStateChanged.listen((authEvent) {
-        print('auth changed!');
-      });
-    // Try explicitly signing in if necessary.
-    _userCredentials = await firebaseAuth.signInWithPopup(googleAuth);
-    if (_userCredentials != null) {
-      var user = new User(
-        _userCredentials.user.uid,
-        _userCredentials.user.displayName,
-        [new RoomRef('default', 'General Discussion')],
-      );
-      print('Loaded user ${user.name}');
-      set('/user/${user.uid}', user.toJson());
-    }
+    _firebaseAuth = fb.auth();
+    _initializer = _firebaseAuth.onAuthStateChanged
+        .map((authEvent) {
+          print('auth changed!');
+          // Try explicitly signing in if necessary.
+          var googleAuth = new fb.GoogleAuthProvider();
+          if (authEvent == null) {
+            _firebaseAuth.signInWithRedirect(googleAuth);
+          } else {
+            _userRef =
+                new UserRef(authEvent.user.uid, authEvent.user.displayName);
+            var user = new User(
+              authEvent.user.uid,
+              authEvent.user.displayName,
+              [new RoomRef('default', 'General Discussion')],
+            );
+            print('Loaded user ${user.name}');
+            set('/user/${user.uid}', user.toJson());
+            set('/room/default/members/${user.uid}', _userRef.toJson());
+            return true;
+          }
+          return false;
+        })
+        .firstWhere((result) => result == true)
+        .then((_) => null);
   }
 
   @override
-  UserRef get currentUser => _userCredentials?.user == null
-      ? null
-      : new UserRef(
-          _userCredentials.user.uid, _userCredentials.user.displayName);
+  Future<Null> initialize() => _initializer;
+
+  @override
+  UserRef get currentUser => _userRef;
 
   Stream<Object> listen(String request, {int limitToLast}) {
+    print('Listening to $request');
     var ref = fb.database().ref(request);
+    var result = ref.onValue;
     if (limitToLast != null) {
-      ref = ref.limitToLast(limitToLast);
+      result = ref.limitToLast(limitToLast).onValue;
     }
-    return ref.onValue.map((data) {
+    return result.map((data) {
       return data.snapshot.exportVal() as Object;
     });
   }
 
   @override
   Future<Null> push(String request, Map<String, String> json) async {
+    print('Pushing to $request');
     var url = '${FirebaseConfig.databaseURL}/$request';
     var pushRef = await fb.database().ref(request).push(json).future;
     await pushRef.update({'uid': pushRef.key});
@@ -70,6 +75,7 @@ class PlatformImpl extends Platform {
 
   @override
   Future<Null> set(String request, Map<String, String> json) async {
+    print('Setting $request');
     await fb.database().ref(request).set(json);
   }
 }
@@ -90,6 +96,9 @@ class PlatformImplFake extends Platform {
   push(String request, Map<String, String> json) {
     return null;
   }
+
+  @override
+  Future<Null> initialize() => null;
 }
 
 @Injectable()

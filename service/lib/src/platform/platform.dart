@@ -15,7 +15,7 @@ abstract class Platform {
   /// Waits until platform services are initialized.
   ///
   /// If false, the platform services are not ready for consumption.
-  Future<Null> initialize;
+  Future<Null> initialize();
 
   UserRef get currentUser;
 

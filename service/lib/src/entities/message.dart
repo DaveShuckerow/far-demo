@@ -20,8 +20,8 @@ class Message extends MessageRef {
   Message.fromJson(Map<String, Object> json)
       : this(
           json['uid'],
-          new RoomRef.fromJson(json['room']),
-          new UserRef.fromJson(json['sender']),
+          new RoomRef.fromJson(json['room'] as Map<String, Object>),
+          new UserRef.fromJson(json['sender'] as Map<String, Object>),
           json['contents'],
           Int64.parseInt(json['timestamp']),
         );
@@ -45,7 +45,8 @@ class MessageRef {
   MessageRef(this.uid, this.room);
 
   MessageRef.fromJson(Map<String, Object> json)
-      : this(json['uid'], new RoomRef.fromJson(json['room']));
+      : this(json['uid'],
+            new RoomRef.fromJson(json['room'] as Map<String, Object>));
 
   Map<String, String> toJson() => {
         'uid': '$uid',
