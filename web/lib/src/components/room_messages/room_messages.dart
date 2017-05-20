@@ -1,6 +1,5 @@
 import 'package:angular2/common.dart';
 import 'package:angular2/core.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:github.daveshuckerow.chat.service/service.dart';
 import 'package:github.daveshuckerow.chat.web/src/module/platform.dart';
 import 'package:github.daveshuckerow.chat.web/src/state/subscribing_component.dart';
@@ -15,7 +14,7 @@ import 'package:github.daveshuckerow.chat.web/src/state/subscribing_component.da
 class RoomMessagesComponent extends SubscribingComponent
     implements OnInit, OnDestroy {
   final MessageStore messageStore;
-  final User currentUser;
+  final UserRef currentUser;
 
   List<Message> messages;
 

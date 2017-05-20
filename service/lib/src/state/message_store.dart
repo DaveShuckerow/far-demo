@@ -29,9 +29,12 @@ class MessageStore extends Store<MessageListParam, List<Message>> {
   Stream<List<Message>> load(MessageListParam param) async* {
     await for (var json in _platform.listen('messages/${param.roomId}',
         limitToLast: param.limit)) {
+      var jsonList = json as List;
       var messages = <Message>[];
-      for (var jsonMessage in json as List) {
-        messages.add(new Message.fromJson(jsonMessage));
+      if (jsonList != null) {
+        for (var jsonMessage in jsonList) {
+          messages.add(new Message.fromJson(jsonMessage));
+        }
       }
       yield messages;
     }

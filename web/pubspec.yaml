@@ -4,7 +4,7 @@ environment:
 dependencies:
   angular2: ^2.2.0
   fixnum: any
-  firebase: ^3.0.0
+  firebase: ^3.1.0
   github.daveshuckerow.chat.service:
     path: ../service
 dev_dependencies:
@@ -18,3 +18,5 @@ transformers:
     - 'package:angular2/common.dart#COMMON_PIPES'
     entry_points: web/main.dart
 - dart_to_js_script_rewriter
+analyzer:
+  strong-mode: true

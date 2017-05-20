@@ -12,10 +12,10 @@ import 'package:github.daveshuckerow.chat.service/src/entities/user.dart';
 /// implementation of Platform.
 
 abstract class Platform {
-  /// Whether or not the platform services are initialized.
+  /// Waits until platform services are initialized.
   ///
   /// If false, the platform services are not ready for consumption.
-  bool get initialized;
+  Future<Null> initialize;
 
   UserRef get currentUser;
 

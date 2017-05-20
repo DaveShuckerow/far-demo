@@ -14,7 +14,7 @@ class RoomStore extends Store<RoomRef, Room> {
 
   @override
   Stream<Room> load(RoomRef param) async* {
-    await for (var json in _platform.listen('rooms/${param.uid}')) {
+    await for (var json in _platform.listen('room/${param.uid}')) {
       yield new Room.fromJson(json);
     }
   }
