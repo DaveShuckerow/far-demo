@@ -1,7 +1,9 @@
-name: flt
+name: github.daveshuckerow.chat.flt
 description: A new flutter project.
 
 dependencies:
+  github.daveshuckerow.chat.service:
+    path: ../service
   flutter:
     sdk: flutter
 
