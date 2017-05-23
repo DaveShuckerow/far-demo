@@ -10,7 +10,7 @@
   vertical-align: middle;
   display: block;
 }
-
+  
 .page {
   height: calc(100% - 56px);
   width: calc(100% - 256px);
