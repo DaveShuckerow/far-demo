@@ -68,7 +68,6 @@ class PlatformImpl extends Platform {
   @override
   Future<Null> push(String request, Map<String, String> json) async {
     print('Pushing to $request');
-    var url = '${FirebaseConfig.databaseURL}/$request';
     var pushRef = await fb.database().ref(request).push(json).future;
     await pushRef.update({'uid': pushRef.key});
   }

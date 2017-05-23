@@ -1,6 +1,4 @@
 import 'package:angular2/core.dart';
-import 'package:fixnum/fixnum.dart';
-import 'package:github.daveshuckerow.chat.service/fake.dart';
 import 'package:github.daveshuckerow.chat.service/service.dart';
 import 'package:github.daveshuckerow.chat.web/src/module/platform.dart';
 

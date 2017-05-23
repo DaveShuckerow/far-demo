@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'room.dart';
 
 /// A user of the chat app.
