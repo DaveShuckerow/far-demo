@@ -3,8 +3,8 @@ import 'package:github.daveshuckerow.chat.service/service.dart';
 import 'platform.dart';
 
 const fakeBindings = const [
-  PlatformImplFake,
-  const Provider(Platform, useClass: PlatformImplFake),
+  WebPlatformFake,
+  const Provider(Platform, useClass: WebPlatformFake),
   MessageStoreFake,
   const Provider(MessageStore, useClass: MessageStoreFake),
   UserStoreFake,
@@ -13,13 +13,15 @@ const fakeBindings = const [
   const Provider(RoomStore, useClass: RoomStoreFake),
   MessageMutatorFake,
   const Provider(MessageMutator, useClass: MessageMutatorFake),
+  platformBindings,
 ];
 
 const bindings = const [
-  PlatformImpl,
-  const Provider(Platform, useClass: PlatformImpl),
+  WebPlatform,
+  const Provider(Platform, useClass: WebPlatform),
   MessageStore,
   UserStore,
   RoomStore,
   MessageMutator,
+  platformBindings,
 ];

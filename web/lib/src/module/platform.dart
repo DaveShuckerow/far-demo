@@ -1,18 +1,19 @@
 import 'dart:async';
+
 import 'package:angular2/di.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:firebase/firebase.dart' as fb;
+import 'package:fixnum/fixnum.dart';
 import 'package:github.daveshuckerow.chat.service/fake.dart';
 import 'package:github.daveshuckerow.chat.service/service.dart';
 import 'package:github.daveshuckerow.chat.web/src/module/api.dart';
 
 @Injectable()
-class PlatformImpl extends Platform {
+class WebPlatform extends Platform {
   fb.Auth _firebaseAuth;
   UserRef _userRef;
   Future<Null> _initializer;
 
-  PlatformImpl() {
+  WebPlatform() {
     print('starting auth');
     fb.initializeApp(
       apiKey: FirebaseConfig.apiKey,
@@ -80,11 +81,14 @@ class PlatformImpl extends Platform {
 }
 
 @Injectable()
-class PlatformImplFake extends Platform {
-  PlatformImplFake() {}
+class WebPlatformFake extends Platform {
+  WebPlatformFake() {}
 
   @override
-  UserRef get currentUser => users[Int64.ZERO];
+  Future<Null> initialize() async => null;
+
+  @override
+  UserRef get currentUser => users['0'];
 
   @override
   Stream<String> listen(String request, {int limitToLast}) {
@@ -97,7 +101,9 @@ class PlatformImplFake extends Platform {
   }
 
   @override
-  Future<Null> initialize() => null;
+  Future<Null> set(String request, Map<String, String> json) {
+    return null;
+  }
 }
 
 @Injectable()

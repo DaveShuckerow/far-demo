@@ -17,13 +17,18 @@ class RoomListComponent extends SubscribingComponent
 
   RoomListComponent(this.userStore, this.currentUser) : super([userStore]);
 
-  RoomRef get selectedRoom => roomRefs[0];
+  @Output()
+  final onRoomId = new EventEmitter<String>();
+
+  String roomId;
 
   List<RoomRef> roomRefs = [new RoomRef('general', 'DISCUSSIOn')];
 
   @override
   void refresh() {
     roomRefs = userStore.get(currentUser)?.rooms ?? const [];
+    roomId = roomRefs.length > 0 ? roomRefs.first?.uid : null;
     print('loaded rooms: $roomRefs');
+    onRoomId.emit(roomId);
   }
 }

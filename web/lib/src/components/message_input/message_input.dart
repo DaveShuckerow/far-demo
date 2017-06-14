@@ -14,14 +14,17 @@ class MessageInputComponent {
 
   String messageText = '';
 
-  RoomRef roomRef = new RoomRef("default", "General Discussion");
+  @Input()
+  String roomId; // = new RoomRef("default", "General Discussion");
 
   MessageInputComponent(this.messageMutator, this.currentUser);
 
   void send() {
+    assert(roomId != null);
     print('value sending $messageText');
     messageMutator
-        .submit(new Message('', roomRef, currentUser, messageText))
+        .submit(
+            new Message('', new RoomRef(roomId, ''), currentUser, messageText))
         .then((e) {
       if (e != null) return;
       messageText = '';

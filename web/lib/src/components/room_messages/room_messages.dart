@@ -23,13 +23,21 @@ class RoomMessagesComponent extends SubscribingComponent
 
   bool isFromMe(Message message) => message?.sender == currentUser;
 
-  String get _roomId =>
-      "default"; //int.parse(routeParams.get('roomId'), onError: (_) => null);
+  @Input()
+  set roomId(String value) {
+    _roomId = value;
+    refresh();
+  }
+
+  String get roomId => _roomId;
+
+  String _roomId;
+  //"default"; //int.parse(routeParams.get('roomId'), onError: (_) => null);
 
   @override
   void refresh() {
-    if (_roomId == null) return;
-    print('loading data for room $_roomId');
-    messages = messageStore.get(new MessageListParam(_roomId));
+    if (roomId == null) return;
+    print('loading data for room $roomId');
+    messages = messageStore.get(new MessageListParam(roomId));
   }
 }

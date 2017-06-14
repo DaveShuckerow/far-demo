@@ -7,13 +7,13 @@
   </header>
   <section class="page">
     <div class="content">
-      <room-messages></room-messages>
+      <room-messages [roomId]="roomId"></room-messages>
     </div>
     <div class="content-footer">
-      <message-input></message-input>
+      <message-input [roomId]="roomId"></message-input>
     </div>
   </section>
   <div class="nav short-shadow fg-material">
-    <room-list></room-list>
+    <room-list (onRoomId)="roomId=$event"></room-list>
   </div>
 </div>

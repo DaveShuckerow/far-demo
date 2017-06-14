@@ -21,6 +21,7 @@ import 'package:github.daveshuckerow.chat.web/src/components/room_messages/room_
 class AppComponent implements OnInit {
   final Platform platform;
   bool initialized = false;
+  String roomId;
 
   AppComponent(this.platform);
 
