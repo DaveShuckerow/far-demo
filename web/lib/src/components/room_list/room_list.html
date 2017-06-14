@@ -1,4 +1,4 @@
-<div class="list" *ngFor="let roomRef of roomRefs">
+<div *ngFor="let roomRef of roomRefs" (click)="roomId=roomRef.uid" [class]="getStyle(roomRef)">
   <span>{{roomRef.uid}}</span>
   <br/>
   <span>{{roomRef.name}}</span>

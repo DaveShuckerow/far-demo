@@ -20,7 +20,22 @@ class RoomListComponent extends SubscribingComponent
   @Output()
   final onRoomId = new EventEmitter<String>();
 
-  String roomId;
+  set roomId(String value) {
+    _roomId = value;
+    onRoomId.emit(value);
+  }
+
+  String getStyle(RoomRef roomRef) {
+    if (roomRef.uid == roomId) {
+      return 'bg-material';
+    } else {
+      return 'fg-material';
+    }
+  }
+
+  String get roomId => _roomId;
+
+  String _roomId;
 
   List<RoomRef> roomRefs = [new RoomRef('general', 'DISCUSSIOn')];
 
@@ -29,6 +44,5 @@ class RoomListComponent extends SubscribingComponent
     roomRefs = userStore.get(currentUser)?.rooms ?? const [];
     roomId = roomRefs.length > 0 ? roomRefs.first?.uid : null;
     print('loaded rooms: $roomRefs');
-    onRoomId.emit(roomId);
   }
 }
