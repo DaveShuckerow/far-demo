@@ -10,7 +10,6 @@ import 'package:github.daveshuckerow.chat.service/src/entities/user.dart';
 ///
 /// The Flutter and Angular libraries will be responsible for providing an
 /// implementation of Platform.
-
 abstract class Platform {
   /// Waits until platform services are initialized.
   ///
@@ -23,7 +22,15 @@ abstract class Platform {
   Stream<Object> listen(String request, {int limitToLast});
 
   /// Pushes data [json] to [request] in the firebase database.
+  ///
+  /// This is an append operation when previous data exists at this location.
   Future<Null> push(String request, Map<String, String> json);
+
+  /// Sets data [json] to [request] in the firebase database.
+  ///
+  /// This is a replacement operation when previous data exists at this
+  /// location.
+  Future<Null> set(String request, Map<String, String> json);
 }
 
 /// Wrapper around Firebase credentials.
