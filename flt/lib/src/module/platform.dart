@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:fixnum/fixnum.dart';
 import 'package:github.daveshuckerow.chat.service/service.dart';
 import 'package:github.daveshuckerow.chat.service/src/fake/db.dart';
 
@@ -33,10 +32,10 @@ class FlutterPlatformFake extends Platform {
   FlutterPlatformFake() {}
 
   @override
-  Future<Null> initialize() => null;
+  Future<Null> initialize() async => null;
 
   @override
-  UserRef get currentUser => users[Int64.ZERO];
+  UserRef get currentUser => users['0'];
 
   @override
   Stream<String> listen(String request, {int limitToLast}) {

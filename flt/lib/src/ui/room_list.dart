@@ -14,10 +14,11 @@ class _RoomListPageState extends State<RoomListPage> {
   @override
   Widget build(BuildContext context) {
     var roomRefs = userStore.get(currentUser)?.rooms ?? const [];
+    print('Rooms: ${roomRefs.length} | currentUser: ${currentUser.uid}');
     return new Scaffold(
         appBar: new AppBar(title: new Text('Chatty')),
         body: new ListView(
-          children: roomRefs.map(_buildRoomListItem),
+          children: roomRefs.map(_buildRoomListItem).toList(),
         ));
   }
 
