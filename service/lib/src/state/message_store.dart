@@ -47,6 +47,14 @@ class MessageStore extends Store<MessageListParam, List<Message>> {
 @Injectable()
 class MessageStoreFake extends Store<MessageListParam, List<Message>>
     implements MessageStore {
+  final MessageMutator messageMutator;
+
+  MessageStoreFake(this.messageMutator) {
+    messageMutator.subscribe(this, () {
+      notify();
+    });
+  }
+
   @override
   Stream<List<Message>> load(MessageListParam param) async* {
     await new Future.delayed(const Duration(seconds: 1));

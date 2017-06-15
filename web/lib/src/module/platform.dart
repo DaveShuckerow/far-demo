@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:angular2/di.dart';
 import 'package:firebase/firebase.dart' as fb;
-import 'package:fixnum/fixnum.dart';
 import 'package:github.daveshuckerow.chat.service/fake.dart';
 import 'package:github.daveshuckerow.chat.service/service.dart';
 import 'package:github.daveshuckerow.chat.web/src/module/api.dart';

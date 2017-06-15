@@ -8,12 +8,14 @@ class Publisher {
   @protected
   void notify() {
     for (var subscriber in _subscribers.keys) {
+      print('notifying subscribers');
       _subscribers[subscriber]();
     }
   }
 
   void subscribe(Object subscriber, VoidCallback onData) {
     _subscribers[subscriber] = onData;
+    print('subscription to $this from $subscriber');
   }
 
   void unsubscribe(Object subscriber) {

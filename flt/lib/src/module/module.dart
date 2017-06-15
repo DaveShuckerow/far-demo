@@ -30,7 +30,7 @@ class ServiceLocator {
     return new ServiceLocator._(
         new RoomStoreFake(messageMutator),
         new UserStoreFake(),
-        new MessageStoreFake(),
+        new MessageStoreFake(messageMutator),
         messageMutator,
         new FlutterPlatformFake());
   }

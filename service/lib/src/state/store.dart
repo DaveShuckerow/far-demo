@@ -36,7 +36,6 @@ abstract class Store<P, D> extends Publisher {
 
   void clearCache() {
     _cache.clear();
-    print("notifying!");
     notify();
   }
 

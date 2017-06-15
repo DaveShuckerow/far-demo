@@ -21,44 +21,57 @@ class _RoomMessagesPageState extends SubscribingState<RoomMessagesPage> {
   _RoomMessagesPageState() : super([service.messageStore]);
 
   bool _isFromMe(Message message) => message?.sender == currentUser;
-  TextAlign _getTextAlign(Message message) =>
-      _isFromMe(message) ? TextAlign.left : TextAlign.right;
-  FractionalOffset _getOffset(Message message) => _isFromMe(message)
-      ? FractionalOffset.centerLeft
-      : FractionalOffset.centerRight;
 
   @override
   Widget build(BuildContext context) {
-    var messages = messageStore.get(new MessageListParam(widget.roomId));
+    // We reverse the messages and the list view so that the default scroll
+    // position is the bottom of the ListView.
+    var messages = messageStore
+            .get(new MessageListParam(widget.roomId))
+            ?.reversed
+            ?.toList() ??
+        const [];
     return new Scaffold(
       appBar: new AppBar(title: new Text('Chatty')),
-      body: new ListView(children: messages.map(_buildMessage).toList()),
-      bottomNavigationBar: new MessageInput(),
+      body: new Container(
+        color: new Color.fromRGBO(0, 0, 0, 0.08),
+        child: new ListView(
+          children: messages.map(_buildMessage).toList(),
+          reverse: true,
+        ),
+      ),
+      bottomNavigationBar: new MessageInput(roomId: widget.roomId),
     );
   }
 
   Widget _buildMessage(Message message) {
     var textTheme = Theme.of(context).textTheme;
+    var textAlign = _isFromMe(message) ? TextAlign.right : TextAlign.left;
+
     return new Align(
-      alignment: _getOffset(message),
+      alignment: _isFromMe(message)
+          ? FractionalOffset.centerRight
+          : FractionalOffset.centerLeft,
       child: new Card(
         elevation: 2.0,
         child: new Container(
-          constraints: const BoxConstraints(maxWidth: 240.0),
+          constraints: const BoxConstraints(maxWidth: 240.0, minWidth: 60.0),
           margin: const EdgeInsets.all(8.0),
           child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: _isFromMe(message)
+                ? CrossAxisAlignment.end
+                : CrossAxisAlignment.start,
             children: [
               new Text(
                 message.sender.name,
-                style: textTheme.body2,
-                textAlign: _getTextAlign(message),
+                style: textTheme.body1.copyWith(color: Colors.black38),
+                textAlign: textAlign,
               ),
               new Padding(padding: const EdgeInsets.only(top: 8.0)),
               new Text(
                 message.contents,
                 style: textTheme.body1,
-                textAlign: _getTextAlign(message),
+                textAlign: textAlign,
               ),
             ],
           ),
